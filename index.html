@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Fix & Ride - Réparation Électronique & Vélos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        tech: {
+                            50: '#f0f9ff',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            glow: '#38bdf8',
+                        },
+                        bike: {
+                            50: '#f0fdf4',
+                            500: '#16a34a',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            glow: '#4ade80',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .tab-active-tech {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+            box-shadow: 0 4px 20px -2px rgba(56, 189, 248, 0.5);
+        }
+        .tab-active-bike {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: white;
+            box-shadow: 0 4px 20px -2px rgba(74, 222, 128, 0.5);
+        }
+        .glow-tech {
+            box-shadow: 0 0 25px -5px rgba(56, 189, 248, 0.25);
+        }
+        .glow-bike {
+            box-shadow: 0 0 25px -5px rgba(74, 222, 128, 0.25);
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden antialiased">
+
+    <!-- Top Bar Navigation & Contact Info -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchDepartment('tech')">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-500 to-emerald-500 flex items-center justify-center text-white font-black text-xl shadow-lg">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-white">FIX & RIDE</span>
+                        <span id="brand-tagline" class="block text-xs font-medium text-sky-400 transition-colors duration-300">
+                            Atelier High-Tech & Mobility
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Department Switcher Hub (Desktop & Tablet) -->
+                <div class="hidden md:flex p-1.5 rounded-2xl bg-slate-900/90 border border-slate-800">
+                    <button id="dept-btn-tech" onclick="switchDepartment('tech')" 
+                        class="flex items-center space-x-2.5 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 tab-active-tech">
+                        <i class="fa-solid fa-mobile-screen-button text-base"></i>
+                        <span>Électronique & High-Tech</span>
+                    </button>
+                    <button id="dept-btn-bike" onclick="switchDepartment('bike')" 
+                        class="flex items-center space-x-2.5 px-6 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-bicycle text-base"></i>
+                        <span>Cycles & Mobilité</span>
+                    </button>
+                </div>
+
+                <!-- Action Button & Quick Phone -->
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="tel:0142680000" class="flex items-center space-x-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-emerald-400">
+                            <i class="fa-solid fa-phone text-xs"></i>
+                        </div>
+                        <span>514-608-8177</span>
+                    </a>
+                    <button onclick="openBookingModal()" id="header-cta" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all duration-200 shadow-md">
+                        Prendre Rendez-vous
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden items-center space-x-2">
+                    <button onclick="openBookingModal()" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-sky-500 text-slate-950">
+                        RDV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Department Switcher Hub (Mobile Bar) -->
+            <div class="flex md:hidden pb-3 pt-1 grid grid-cols-2 gap-2">
+                <button id="dept-btn-tech-mob" onclick="switchDepartment('tech')" 
+                    class="flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold transition-all duration-300 tab-active-tech">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <span>Électronique</span>
+                </button>
+                <button id="dept-btn-bike-mob" onclick="switchDepartment('bike')" 
+                    class="flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold text-slate-400 bg-slate-900 border border-slate-800">
+                    <i class="fa-solid fa-bicycle"></i>
+                    <span>Vélos</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content Wrapper -->
+    <main class="flex-grow">
+
+        <!-- ======================================================== -->
+        <!-- TAB 1: ELECTRONICS & PHONE REPAIR SECTION                -->
+        <!-- ======================================================== -->
+        <section id="section-tech" class="transition-opacity duration-500">
+            <!-- Tech Hero -->
+            <div class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-950">
+                <div class="absolute -top-40 -right-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-wider">
+                                <i class="fa-solid fa-bolt text-xs"></i>
+                                <span>Atelier Spécialisé Express</span>
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                                Réparation <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Smartphone & High-Tech</span> en 30 Min
+                            </h1>
+                            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
+                                Écran cassé, batterie fatiguée, connecteur endommagé ou panne carte mère. Nos techniciens certifiés redonnent vie à vos appareils électroniques avec des pièces d'origine garantes 1 an.
+                            </p>
+                            <!-- Feature badges -->
+                            <div class="pt-2 flex flex-wrap gap-4 justify-center lg:justify-start text-xs font-medium text-slate-300">
+                                <div class="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-clock text-sky-400"></i>
+                                    <span>Express 30-45 min</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-shield-halved text-sky-400"></i>
+                                    <span>Garantie 1 An</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-microchip text-sky-400"></i>
+                                    <span>Pièces D'Origine</span>
+                                </div>
+                            </div>
+                            <!-- CTA Buttons -->
+                            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                                <button onclick="scrollToEstimator('tech')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all shadow-lg shadow-sky-500/20">
+                                    Estimer mon devis instantané
+                                </button>
+                                <button onclick="openBookingModal('Smartphone')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold glass-card text-white hover:bg-slate-800 transition-all">
+                                    Réserver un créneau
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tech Quick Diagnostic Card -->
+                        <div class="lg:col-span-5">
+                            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-sky-500/20 shadow-2xl relative">
+                                <div class="absolute top-0 right-8 -translate-y-1/2 bg-sky-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                                    Estimation Rapide
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-calculator text-sky-400"></i>
+                                    Simulateur Réparation
+                                </h3>
+                                <p class="text-xs text-slate-400 mb-6">Obtenez immédiatement un prix indicatif pour votre matériel.</p>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase mb-2">1. Type d'appareil</label>
+                                        <select id="tech-device-type" onchange="calculateTechEstimate()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500">
+                                            <option value="smartphone">Smartphone (iPhone, Samsung, Xiaomi...)</option>
+                                            <option value="laptop">Ordinateur Portable (MacBook, PC)</option>
+                                            <option value="tablet">Tablette (iPad, Tab)</option>
+                                            <option value="console">Console de jeu (PS5, Switch, Xbox)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase mb-2">2. Type de panne</label>
+                                        <select id="tech-issue-type" onchange="calculateTechEstimate()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500">
+                                            <option value="screen">Remplacement Écran / Tactile</option>
+                                            <option value="battery">Remplacement Batterie</option>
+                                            <option value="connector">Connecteur de charge / Port HDMI</option>
+                                            <option value="water">Désoxydation / Dégât des eaux</option>
+                                            <option value="system">Dépannage Système / SSD / Virus</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs text-slate-400 block">Prix estimé TTC :</span>
+                                            <span id="tech-estimated-price" class="text-3xl font-black text-sky-400">69$</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-xs text-slate-400 block">Délai moyen :</span>
+                                            <span id="tech-estimated-time" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">30 min sur RDV</span>
+                                        </div>
+                                    </div>
+
+                                    <button onclick="openBookingFromEstimator('tech')" class="w-full py-3.5 rounded-xl font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all text-sm">
+                                        Bloquer cette offre & Réserver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Services Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Nos Prestations Électroniques</h2>
+                    <p class="mt-4 text-slate-400">Prise en charge complète de votre matériel informatique et multimédia.</p>
+                    
+                    <!-- Search Filter Bar -->
+                    <div class="mt-8 relative max-w-md mx-auto">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="tech-search" onkeyup="filterTechServices()" placeholder="Rechercher une panne (ex: écran, batterie, hdmi)..." class="w-full bg-slate-900 border border-slate-800 rounded-full pl-11 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500">
+                    </div>
+                </div>
+
+                <div id="tech-services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1: Smartphones -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between service-card" data-tags="smartphone iphone samsung huawei ecran batterie charge">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Smartphones & Phablettes</h3>
+                            <p class="text-slate-400 text-sm mb-4">iPhones, Samsung Galaxy, Xiaomi, Google Pixel, Huawei...</p>
+                            <ul class="space-y-2 text-xs text-slate-300 mb-6">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Remplacement d'écran d'origine ou OLED</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Changement rapide de batterie de haute qualité</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Réparation du connecteur de charge (USB-C / Lightning)</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Micro-soudure & réparation carte mère</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">39 €</strong></span>
+                            <button onclick="openBookingModal('Smartphone')" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+                                Réserver <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Laptops & PC -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between service-card" data-tags="pc macbook ordinateur laptop disque ssd virus ventilation">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-laptop"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">MacBook & PC Portables</h3>
+                            <p class="text-slate-400 text-sm mb-4">Diagnostics informatiques matériels et logiciels complets.</p>
+                            <ul class="space-y-2 text-xs text-slate-300 mb-6">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Nettoyage du système de refroidissement & pâte thermique</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Remplacement de dalle d'écran LCD / LED</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Upgrade SSD ultra-rapide & augmentation RAM</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Suppressions de malwares & réinstallation OS</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">49$</strong></span>
+                            <button onclick="openBookingModal('Ordinateur')" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+                                Réserver <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Consoles & Gadgets -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between service-card" data-tags="console ps5 ps4 xbox switch hdmi manette audio">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Consoles de Jeu & Audio</h3>
+                            <p class="text-slate-400 text-sm mb-4">PS5, PS4, Xbox Series, Nintendo Switch, Casques audio.</p>
+                            <ul class="space-y-2 text-xs text-slate-300 mb-6">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Remplacement du port HDMI (PS5, Xbox, Switch)</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Réparation du Drift des joysticks (Joy-Con, DualSense)</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Remplacement lecteur disque & ventilateur interne</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-2"></i> Désoxydation des équipements électroniques</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">45 €</strong></span>
+                            <button onclick="openBookingModal('Console')" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+                                Réserver <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================================================== -->
+        <!-- TAB 2: BICYCLE REPAIR SERVICE SECTION                    -->
+        <!-- ======================================================== -->
+        <section id="section-bike" class="hidden transition-opacity duration-500">
+            <!-- Bike Hero -->
+            <div class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-950">
+                <div class="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                                <i class="fa-solid fa-leaf text-xs"></i>
+                                <span>Atelier Mobilité Douce & Électrique</span>
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                                Entretien & Réparation <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Tous Vélos & VAE</span>
+                            </h1>
+                            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
+                                Du simple changement de chambre à air au diagnostic complet de votre Vélo à Assistance Électrique (VAE). Nos techniciens certifiés prennent soin de votre monture en atelier ou sur rendez-vous.
+                            </p>
+                            <!-- Feature badges -->
+                            <div class="pt-2 flex flex-wrap gap-4 justify-center lg:justify-start text-xs font-medium text-slate-300">
+                                <div class="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-certificate text-emerald-400"></i>
+                                    <span>Mécaniciens Certifiés Bosch/Shimano</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-truck-pickup text-emerald-400"></i>
+                                    <span>Option Enlèvement Domicile</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-stopwatch text-emerald-400"></i>
+                                    <span>Crevaison en 15 min</span>
+                                </div>
+                            </div>
+                            <!-- CTA Buttons -->
+                            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                                <button onclick="scrollToEstimator('bike')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all shadow-lg shadow-emerald-500/20">
+                                    Découvrir nos forfaits révision
+                                </button>
+                                <button onclick="openBookingModal('Vélo')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold glass-card text-white hover:bg-slate-800 transition-all">
+                                    Réserver mon entretien
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bike Quick Estimator Card -->
+                        <div class="lg:col-span-5">
+                            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/20 shadow-2xl relative">
+                                <div class="absolute top-0 right-8 -translate-y-1/2 bg-emerald-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                                    Forfait Conseillé
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-sliders text-emerald-400"></i>
+                                    Simulateur Révision
+                                </h3>
+                                <p class="text-xs text-slate-400 mb-6">Évaluez l'entretien nécessaire selon la typologie de votre vélo.</p>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase mb-2">1. Type de vélo</label>
+                                        <select id="bike-type" onchange="calculateBikeEstimate()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                                            <option value="musculaire">Vélo de Ville / Route / VTT (Musculaire)</option>
+                                            <option value="ebike">Vélo Électrique (VAE Bosch, Shimano, Bafang...)</option>
+                                            <option value="cargo">Vélo Cargo / Longtail</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase mb-2">2. Prestation souhaitée</label>
+                                        <select id="bike-service-type" onchange="calculateBikeEstimate()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                                            <option value="rev_eco">Forfait Éco (Sécurité & Réglages de base)</option>
+                                            <option value="rev_integral">Forfait Intégral (Nettoyage + Réglages complets)</option>
+                                            <option value="diag_ebike">Diagnostic Batterie & Moteur Électrique</option>
+                                            <option value="crevaison">Changement Pneu / Chambre à air</option>
+                                            <option value="freins">Purge de Freins Hydrauliques</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs text-slate-400 block">Tarif indicatif :</span>
+                                            <span id="bike-estimated-price" class="text-3xl font-black text-emerald-400">45 €</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-xs text-slate-400 block">Temps d'immobilisation :</span>
+                                            <span id="bike-estimated-time" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">2h ou sous 24h</span>
+                                        </div>
+                                    </div>
+
+                                    <button onclick="openBookingFromEstimator('bike')" class="w-full py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all text-sm">
+                                        Réserver cette prestation
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bike Packages Section -->
+            <div id="bike-packages" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Nos Forfaits Révision</h2>
+                    <p class="mt-4 text-slate-400">Des formules complètes et transparentes pour rouler en toute sérénité.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Forfait Eco -->
+                    <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Essentiel</span>
+                            <h3 class="text-2xl font-bold text-white mt-4">Forfait Éco</h3>
+                            <p class="text-slate-400 text-sm mt-2">Pour un contrôle de sécurité périodique rapide.</p>
+                            <div class="mt-6 mb-8">
+                                <span class="text-4xl font-extrabold text-white">39 €</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Contrôle des points de sécurité (15 points)</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Réglage des freins avant/arrière</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Réglage de la transmission & dérailleur</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Pression des pneumatiques & lubrification chaîne</li>
+                            </ul>
+                        </div>
+                        <button onclick="openBookingModal('Forfait Éco Vélo')" class="mt-8 w-full py-3 rounded-xl font-bold border border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-slate-950 transition-all text-sm">
+                            Sélectionner
+                        </button>
+                    </div>
+
+                    <!-- Forfait Integral (Featured) -->
+                    <div class="glass-card p-8 rounded-3xl border-2 border-emerald-500/60 relative flex flex-col justify-between shadow-xl glow-bike">
+                        <div class="absolute -top-3.5 right-8 bg-emerald-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                            Recommandé
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Complet</span>
+                            <h3 class="text-2xl font-bold text-white mt-4">Forfait Intégral</h3>
+                            <p class="text-slate-400 text-sm mt-2">Remise à neuf complète et réglages de précision.</p>
+                            <div class="mt-6 mb-8">
+                                <span class="text-4xl font-extrabold text-white">79 €</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Tout le contenu du Forfait Éco</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Devoilage des roues avant et arrière</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Nettoyage complet de la transmission & dégraissage</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Serrage au couple & contrôle des jeux (direction, pédalier)</li>
+                                <li class="flex items-center"><li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Essai routier de sécurité</li>
+                            </ul>
+                        </div>
+                        <button onclick="openBookingModal('Forfait Intégral Vélo')" class="mt-8 w-full py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all text-sm">
+                            Sélectionner ce forfait
+                        </button>
+                    </div>
+
+                    <!-- Forfait Electrique VAE -->
+                    <div class="glass-card p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Spécial VAE</span>
+                            <h3 class="text-2xl font-bold text-white mt-4">Forfait Électrique</h3>
+                            <p class="text-slate-400 text-sm mt-2">Dédié aux vélos à assistance électrique (Bosch, Shimano...)</p>
+                            <div class="mt-6 mb-8">
+                                <span class="text-4xl font-extrabold text-white">99 €</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Tout le contenu du Forfait Intégral</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Diagnostic électronique du moteur & console</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Mise à jour logicielle des calculateurs</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Rapport de santé & capacité batterie (SOH)</li>
+                            </ul>
+                        </div>
+                        <button onclick="openBookingModal('Forfait VAE Électrique')" class="mt-8 w-full py-3 rounded-xl font-bold border border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-slate-950 transition-all text-sm">
+                            Sélectionner
+                        </button>
+                    </div>
+                </div>
+
+                <!-- À la carte menu -->
+                <div class="mt-20">
+                    <h3 class="text-2xl font-bold text-white mb-8 text-center">Prestations À la Carte</h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Chambre à air / Pneu</h4>
+                                <span class="text-xs text-slate-400">Montage inclus</span>
+                            </div>
+                            <span class="text-base font-extrabold text-emerald-400">15 €</span>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Purge Frein Hydraulique</h4>
+                                <span class="text-xs text-slate-400">Par étrier</span>
+                            </div>
+                            <span class="text-base font-extrabold text-emerald-400">25 €</span>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Changement de Chaîne</h4>
+                                <span class="text-xs text-slate-400">Réglage compris</span>
+                            </div>
+                            <span class="text-base font-extrabold text-emerald-400">20 €</span>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Dévoilage de roue</h4>
+                                <span class="text-xs text-slate-400">Par roue</span>
+                            </div>
+                            <span class="text-base font-extrabold text-emerald-400">20 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- COMMON SECTION: WHY CHOOSE US & REVIEWS                  -->
+        <!-- ======================================================== -->
+        <section class="border-t border-slate-800 bg-slate-950/50 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    <div class="p-4">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-sky-400 text-xl mb-4">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                        <h4 class="text-base font-bold text-white">Rapidité Garantie</h4>
+                        <p class="text-xs text-slate-400 mt-2">La majorité des réparations effectuées dans la journée ou en 30 min sur RDV.</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                            <i class="fa-solid fa-shield-virus"></i>
+                        </div>
+                        <h4 class="text-base font-bold text-white">Garantie 1 An</h4>
+                        <p class="text-xs text-slate-400 mt-2">Toutes nos pièces détachées et nos interventions sont couvertes 12 mois.</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-sky-400 text-xl mb-4">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <h4 class="text-base font-bold text-white">Devis Transparents</h4>
+                        <p class="text-xs text-slate-400 mt-2">Aucun frais caché. Vous validez le montant exact avant le début des travaux.</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                            <i class="fa-solid fa-recycle"></i>
+                        </div>
+                        <h4 class="text-base font-bold text-white">Démarche Éco-Responsable</h4>
+                        <p class="text-xs text-slate-400 mt-2">Nous privilégions la réparation au remplacement et recyclons vos vieux composants.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Reviews Grid -->
+        <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-3xl font-extrabold text-white">Avis de nos Clients</h2>
+                <p class="text-slate-400 text-sm mt-2">Ce que pensent nos utilisateurs de nos deux ateliers.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center space-x-1 text-amber-400 mb-3 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        "Écran d'iPhone 13 changé en 30 minutes chrono pendant que je prenais un café. Accueil très pro et écran d'excellente qualité !"
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs">M</div>
+                        <div>
+                            <h5 class="text-xs font-bold text-white">Marc D.</h5>
+                            <span class="text-[10px] text-slate-400">Réparation Smartphone</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center space-x-1 text-amber-400 mb-3 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        "Revision complète effectuée sur mon VAE Bosch. Le vélo roule comme au premier jour, transmission ultra douce. Merci à l'équipe !"
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">S</div>
+                        <div>
+                            <h5 class="text-xs font-bold text-white">Sophie L.</h5>
+                            <span class="text-[10px] text-slate-400">Forfait VAE Électrique</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center space-x-1 text-amber-400 mb-3 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        "Port HDMI de ma PS5 réparé sans aucun souci. Tarif clair annoncé à l'avance sans mauvaise surprise. Je recommande les yeux fermés."
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs">A</div>
+                        <div>
+                            <h5 class="text-xs font-bold text-white">Alexandre B.</h5>
+                            <span class="text-[10px] text-slate-400">Réparation Console</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic FAQ Accordion -->
+        <section class="py-16 bg-slate-900/60 border-t border-slate-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-white">Foire Aux Questions</h2>
+                    <p class="text-slate-400 text-sm mt-2" id="faq-subtitle">Questions fréquentes concernant l'atelier électronique.</p>
+                </div>
+
+                <!-- Tech FAQ Container -->
+                <div id="faq-tech-container" class="space-y-4">
+                    <div class="glass-panel rounded-xl overflow-hidden border border-slate-800">
+                        <button onclick="toggleFaq('faq-t1')" class="w-full text-left px-6 py-4 flex justify-between items-center text-sm font-bold text-white hover:bg-slate-800/50">
+                            <span>Combien de temps dure la réparation d'un écran de téléphone ?</span>
+                            <i id="faq-t1-icon" class="fa-solid fa-chevron-down text-sky-400 transition-transform"></i>
+                        </button>
+                        <div id="faq-t1" class="hidden px-6 pb-4 text-xs text-slate-400 leading-relaxed">
+                            Pour 90% des modèles de smartphones (iPhone, Samsung Galaxy, Xiaomi), le remplacement de l'écran s'effectue en 30 à 45 minutes dans notre atelier sur ou sans rendez-vous.
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-xl overflow-hidden border border-slate-800">
+                        <button onclick="toggleFaq('faq-t2')" class="w-full text-left px-6 py-4 flex justify-between items-center text-sm font-bold text-white hover:bg-slate-800/50">
+                            <span>Mes données personnelles sont-elles conservées lors de la réparation ?</span>
+                            <i id="faq-t2-icon" class="fa-solid fa-chevron-down text-sky-400 transition-transform"></i>
+                        </button>
+                        <div id="faq-t2" class="hidden px-6 pb-4 text-xs text-slate-400 leading-relaxed">
+                            Oui, vos données restent intactes ! Nous n'effectuons aucune réinitialisation sans votre accord préalable. Nous recommandons toutefois d'effectuer une sauvegarde régulière par précaution.
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-xl overflow-hidden border border-slate-800">
+                        <button onclick="toggleFaq('faq-t3')" class="w-full text-left px-6 py-4 flex justify-between items-center text-sm font-bold text-white hover:bg-slate-800/50">
+                            <span>Quelle est la durée de la garantie sur les réparations ?</span>
+                            <i id="faq-t3-icon" class="fa-solid fa-chevron-down text-sky-400 transition-transform"></i>
+                        </button>
+                        <div id="faq-t3" class="hidden px-6 pb-4 text-xs text-slate-400 leading-relaxed">
+                            Toutes nos interventions ainsi que les pièces de rechange installées bénéficient d'une garantie pièces et main d'œuvre d'une durée de 1 an (hors casse accidentelle et oxydation ultérieure).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bike FAQ Container (Hidden by default) -->
+                <div id="faq-bike-container" class="space-y-4 hidden">
+                    <div class="glass-panel rounded-xl overflow-hidden border border-slate-800">
+                        <button onclick="toggleFaq('faq-b1')" class="w-full text-left px-6 py-4 flex justify-between items-center text-sm font-bold text-white hover:bg-slate-800/50">
+                            <span>Faut-il obligatoirement prendre rendez-vous pour faire réparer son vélo ?</span>
+                            <i id="faq-b1-icon" class="fa-solid fa-chevron-down text-emerald-400 transition-transform"></i>
+                        </button>
+                        <div id="faq-b1" class="hidden px-6 pb-4 text-xs text-slate-400 leading-relaxed">
+                            Pour les petites urgences (crevaison, réglage rapide), vous pouvez venir directement sans rendez-vous. Pour les forfaits révision complets ou la maintenance VAE, réserver à l'avance garantit une immobilisation minimale.
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-xl overflow-hidden border border-slate-800">
+                        <button onclick="toggleFaq('faq-b2')" class="w-full text-left px-6 py-4 flex justify-between items-center text-sm font-bold text-white hover:bg-slate-800/50">
+                            <span>Prenez-vous en charge toutes les marques de vélos électriques ?</span>
+                            <i id="faq-b2-icon" class="fa-solid fa-chevron-down text-emerald-400 transition-transform"></i>
+                        </button>
+                        <div id="faq-b2" class="hidden px-6 pb-4 text-xs text-slate-400 leading-relaxed">
+                            Nous sommes certifiés pour les motorisations majoritaires du marché (Bosch, Shimano, Brose, Bafang). Pour la partie cycle classique (freins, pneus, câbles), nous intervenons sur absolument tous les types et marques de vélos.
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-xl overflow-hidden border border-slate-800">
+                        <button onclick="toggleFaq('faq-b3')" class="w-full text-left px-6 py-4 flex justify-between items-center text-sm font-bold text-white hover:bg-slate-800/50">
+                            <span>Proposez-vous un service d'enlèvement à domicile ?</span>
+                            <i id="faq-b3-icon" class="fa-solid fa-chevron-down text-emerald-400 transition-transform"></i>
+                        </button>
+                        <div id="faq-b3" class="hidden px-6 pb-4 text-xs text-slate-400 leading-relaxed">
+                            Oui ! Dans un rayon de 10 km autour de notre atelier, nous pouvons venir récupérer votre vélo à votre domicile ou lieu de travail et vous le ramener une fois la révision terminée.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 text-slate-400 text-xs py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-emerald-500 flex items-center justify-center text-white font-black text-sm">
+                            <i class="fa-solid fa-wrench"></i>
+                        </div>
+                        <span class="text-base font-bold text-white">FIX & RIDE</span>
+                    </div>
+                    <p class="text-slate-400">Votre double atelier de réparation de proximité. High-Tech & Mobilité Urbaine.</p>
+                </div>
+                <div>
+                    <h5 class="text-sm font-bold text-white mb-3">Horaires d'ouverture</h5>
+                    <p>Lundi - Vendredi : 09h00 - 19h00</p>
+                    <p>Samedi : 10h00 - 18h00</p>
+                    <p class="text-amber-400 mt-1">Dimanche : Fermé</p>
+                </div>
+                <div>
+                    <h5 class="text-sm font-bold text-white mb-3">Adresse & Contact</h5>
+                    <p><i class="fa-solid fa-location-dot text-sky-400 mr-2"></i>145 Avenue de la République, 75011 Paris</p>
+                    <p class="mt-1"><i class="fa-solid fa-phone text-emerald-400 mr-2"></i>01 42 68 00 00</p>
+                    <p class="mt-1"><i class="fa-solid fa-envelope text-sky-400 mr-2"></i>contact@fixandride.fr</p>
+                </div>
+                <div>
+                    <h5 class="text-sm font-bold text-white mb-3">Modes de Règlement</h5>
+                    <p class="text-slate-400 mb-2">CB, Sans Contact, Espèces, Chèques culture/mobilité accepted.</p>
+                    <div class="flex space-x-3 text-lg text-slate-500">
+                        <i class="fa-brands fa-cc-visa"></i>
+                        <i class="fa-brands fa-cc-mastercard"></i>
+                        <i class="fa-brands fa-apple-pay"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-900 text-center text-slate-600">
+                &copy; 2026 Atelier Fix & Ride. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <!-- APPOINTMENT BOOKING MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-lg rounded-3xl border border-slate-700 shadow-2xl p-6 sm:p-8 relative overflow-hidden">
+            
+            <!-- Close button -->
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="mb-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800 text-xs font-bold text-sky-400 mb-2" id="modal-badge">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Prise de Rendez-vous</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white">Réserver un créneau</h3>
+                <p class="text-xs text-slate-400">Confirmez vos informations pour bloquer un technicien à l'atelier.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Département concerné</label>
+                    <select id="modal-department" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                        <option value="tech">Électronique & High-Tech</option>
+                        <option value="bike">Cycles & Vélos</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Appareil / Modèle / Prestation</label>
+                    <input type="text" id="modal-service-details" required placeholder="Ex: iPhone 13 / Changement écran ou VAE Bosch / Revision" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Date souhaitée</label>
+                        <input type="date" required id="modal-date" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Heure</label>
+                        <select id="modal-time" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                            <option>10:00</option>
+                            <option>11:30</option>
+                            <option>14:00</option>
+                            <option>15:30</option>
+                            <option>17:00</option>
+                            <option>18:15</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nom complet</label>
+                        <input type="text" required placeholder="Jean Dupont" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Téléphone</label>
+                        <input type="tel" required placeholder="06 12 34 56 78" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                    </div>
+                </div>
+
+                <div class="pt-3">
+                    <button type="submit" id="modal-submit-btn" class="w-full py-3.5 rounded-xl font-bold bg-sky-500 text-slate-950 hover:bg-sky-400 transition-all text-sm shadow-lg">
+                        Confirmer le Rendez-vous
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Overlay Message inside modal -->
+            <div id="booking-success" class="hidden absolute inset-0 bg-slate-900/95 flex flex-col items-center justify-center p-6 text-center space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white">Rendez-vous Confirmé !</h4>
+                <p class="text-xs text-slate-300 max-w-xs">Un SMS de confirmation vient de vous être envoyé. Notre équipe vous attend au créneau sélectionné.</p>
+                <button onclick="closeBookingModal()" class="px-6 py-2.5 rounded-xl font-bold bg-slate-800 text-white hover:bg-slate-700 text-xs">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT INTERACTIVE LOGIC -->
+    <script>
+        // Global state tracking
+        let currentDept = 'tech';
+
+        // Switch Tab Department Logic
+        function switchDepartment(dept) {
+            currentDept = dept;
+
+            const secTech = document.getElementById('section-tech');
+            const secBike = document.getElementById('section-bike');
+            
+            const btnTech = document.getElementById('dept-btn-tech');
+            const btnBike = document.getElementById('dept-btn-bike');
+            const btnTechMob = document.getElementById('dept-btn-tech-mob');
+            const btnBikeMob = document.getElementById('dept-btn-bike-mob');
+
+            const brandTagline = document.getElementById('brand-tagline');
+            const headerCta = document.getElementById('header-cta');
+            const modalDeptSelect = document.getElementById('modal-department');
+
+            const faqSubtitle = document.getElementById('faq-subtitle');
+            const faqTechContainer = document.getElementById('faq-tech-container');
+            const faqBikeContainer = document.getElementById('faq-bike-container');
+
+            if (dept === 'tech') {
+                secTech.classList.remove('hidden');
+                secBike.classList.add('hidden');
+
+                // Desktop tab styling
+                btnTech.className = 'flex items-center space-x-2.5 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 tab-active-tech';
+                btnBike.className = 'flex items-center space-x-2.5 px-6 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all duration-300';
+                
+                // Mobile tab styling
+                btnTechMob.className = 'flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold transition-all duration-300 tab-active-tech';
+                btnBikeMob.className = 'flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold text-slate-400 bg-slate-900 border border-slate-800';
+
+                // Accent Tagline & CTA
+                brandTagline.textContent = "Atelier High-Tech & Smart Repair";
+                brandTagline.className = "block text-xs font-medium text-sky-400 transition-colors duration-300";
+                
+                headerCta.className = "px-5 py-2.5 rounded-xl text-sm font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all duration-200 shadow-md";
+
+                // FAQ Switch
+                faqSubtitle.textContent = "Questions fréquentes concernant l'atelier électronique & smartphone.";
+                faqTechContainer.classList.remove('hidden');
+                faqBikeContainer.classList.add('hidden');
+
+                if (modalDeptSelect) modalDeptSelect.value = 'tech';
+
+            } else {
+                secBike.classList.remove('hidden');
+                secTech.classList.add('hidden');
+
+                // Desktop tab styling
+                btnBike.className = 'flex items-center space-x-2.5 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 tab-active-bike';
+                btnTech.className = 'flex items-center space-x-2.5 px-6 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all duration-300';
+
+                // Mobile tab styling
+                btnBikeMob.className = 'flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold transition-all duration-300 tab-active-bike';
+                btnTechMob.className = 'flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold text-slate-400 bg-slate-900 border border-slate-800';
+
+                // Accent Tagline & CTA
+                brandTagline.textContent = "Atelier Mobilité Douce & Entretien Velo";
+                brandTagline.className = "block text-xs font-medium text-emerald-400 transition-colors duration-300";
+
+                headerCta.className = "px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all duration-200 shadow-md";
+
+                // FAQ Switch
+                faqSubtitle.textContent = "Questions fréquentes concernant l'atelier cycles & VAE.";
+                faqBikeContainer.classList.remove('hidden');
+                faqTechContainer.classList.add('hidden');
+
+                if (modalDeptSelect) modalDeptSelect.value = 'bike';
+            }
+        }
+
+        // Tech Price Calculator Logic
+        function calculateTechEstimate() {
+            const device = document.getElementById('tech-device-type').value;
+            const issue = document.getElementById('tech-issue-type').value;
+            const priceEl = document.getElementById('tech-estimated-price');
+            const timeEl = document.getElementById('tech-estimated-time');
+
+            let base = 49;
+            let time = "30 min sur RDV";
+
+            if (device === 'smartphone') {
+                if (issue === 'screen') base = 79;
+                else if (issue === 'battery') base = 49;
+                else if (issue === 'connector') base = 59;
+                else if (issue === 'water') base = 69;
+                else if (issue === 'system') base = 39;
+            } else if (device === 'laptop') {
+                if (issue === 'screen') base = 149;
+                else if (issue === 'battery') base = 89;
+                else if (issue === 'connector') base = 79;
+                else if (issue === 'water') base = 99;
+                else if (issue === 'system') base = 59;
+                time = "24h à 48h";
+            } else if (device === 'tablet') {
+                if (issue === 'screen') base = 119;
+                else if (issue === 'battery') base = 69;
+                else base = 59;
+                time = "1h à 2h";
+            } else if (device === 'console') {
+                if (issue === 'connector') base = 89; // HDMI
+                else base = 59;
+                time = "24h";
+            }
+
+            priceEl.textContent = base + "$";
+            timeEl.textContent = time;
+        }
+
+        // Bike Price Calculator Logic
+        function calculateBikeEstimate() {
+            const bikeType = document.getElementById('bike-type').value;
+            const service = document.getElementById('bike-service-type').value;
+            const priceEl = document.getElementById('bike-estimated-price');
+            const timeEl = document.getElementById('bike-estimated-time');
+
+            let base = 39;
+            let time = "2h ou sous 24h";
+
+            if (service === 'rev_eco') base = 39;
+            else if (service === 'rev_integral') base = 79;
+            else if (service === 'diag_ebike') base = 45;
+            else if (service === 'crevaison') base = 15;
+            else if (service === 'freins') base = 25;
+
+            // Extra for VAE / Cargo complexity
+            if (bikeType === 'ebike' && service.includes('rev')) base += 20;
+            if (bikeType === 'cargo' && service.includes('rev')) base += 30;
+
+            if (service === 'crevaison') time = "15-20 min Express";
+
+            priceEl.textContent = base + "$";
+            timeEl.textContent = time;
+        }
+
+        // Search Filter for Tech Services
+        function filterTechServices() {
+            const input = document.getElementById('tech-search').value.toLowerCase();
+            const cards = document.querySelectorAll('#tech-services-grid .service-card');
+
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags');
+                if (tags.includes(input)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Modal Controls
+        function openBookingModal(defaultDetail = '') {
+            const modal = document.getElementById('booking-modal');
+            const detailInput = document.getElementById('modal-service-details');
+            const deptSelect = document.getElementById('modal-department');
+            const submitBtn = document.getElementById('modal-submit-btn');
+            const badge = document.getElementById('modal-badge');
+
+            // Pre-select department in modal
+            deptSelect.value = currentDept;
+
+            if (currentDept === 'tech') {
+                submitBtn.className = "w-full py-3.5 rounded-xl font-bold bg-sky-500 text-slate-950 hover:bg-sky-400 transition-all text-sm shadow-lg";
+                badge.className = "inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-500/10 text-xs font-bold text-sky-400 mb-2 border border-sky-500/20";
+            } else {
+                submitBtn.className = "w-full py-3.5 rounded-xl font-bold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all text-sm shadow-lg";
+                badge.className = "inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 text-xs font-bold text-emerald-400 mb-2 border border-emerald-500/20";
+            }
+
+            if (defaultDetail) {
+                detailInput.value = defaultDetail;
+            }
+
+            // Set default date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('modal-date').value = tomorrow.toISOString().split('T')[0];
+
+            modal.classList.remove('hidden');
+        }
+
+        function openBookingFromEstimator(dept) {
+            if (dept === 'tech') {
+                const device = document.getElementById('tech-device-type').selectedOptions[0].text;
+                const issue = document.getElementById('tech-issue-type').selectedOptions[0].text;
+                openBookingModal(`${device} - ${issue}`);
+            } else {
+                const bike = document.getElementById('bike-type').selectedOptions[0].text;
+                const service = document.getElementById('bike-service-type').selectedOptions[0].text;
+                openBookingModal(`${bike} - ${service}`);
+            }
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            const success = document.getElementById('booking-success');
+            modal.classList.add('hidden');
+            success.classList.add('hidden');
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            document.getElementById('booking-success').classList.remove('hidden');
+        }
+
+        // Toggle Accordion FAQ
+        function toggleFaq(id) {
+            const faqEl = document.getElementById(id);
+            const iconEl = document.getElementById(id + '-icon');
+
+            if (faqEl.classList.contains('hidden')) {
+                faqEl.classList.remove('hidden');
+                iconEl.style.transform = 'rotate(180deg)';
+            } else {
+                faqEl.classList.add('hidden');
+                iconEl.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function scrollToEstimator(dept) {
+            if (dept !== currentDept) {
+                switchDepartment(dept);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
