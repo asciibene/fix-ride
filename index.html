@@ -93,7 +93,7 @@
                     <div>
                         <span class="text-xl font-extrabold tracking-tight text-white">FIX & RIDE</span>
                         <span id="brand-tagline" class="block text-xs font-medium text-sky-400 transition-colors duration-300">
-                            Atelier High-Tech & Mobility
+                            Réparations & mobilité
                         </span>
                     </div>
                 </div>
@@ -114,14 +114,14 @@
 
                 <!-- Action Button & Quick Phone -->
                 <div class="hidden lg:flex items-center space-x-6">
-                    <a href="tel:0142680000" class="flex items-center space-x-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                    <a href="tel:+15146088177" class="flex items-center space-x-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
                         <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-emerald-400">
                             <i class="fa-solid fa-phone text-xs"></i>
                         </div>
                         <span>514-608-8177</span>
                     </a>
                     <button onclick="openBookingModal()" id="header-cta" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all duration-200 shadow-md">
-                        Prendre Rendez-vous
+                        Rendez-vous
                     </button>
                 </div>
 
@@ -164,13 +164,13 @@
                         <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                             <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-wider">
                                 <i class="fa-solid fa-bolt text-xs"></i>
-                                <span>Atelier Spécialisé Express</span>
+                                <span>Réparation rapide</span>
                             </div>
                             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-                                Réparation <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Smartphone & High-Tech</span> en 30 Min
+                                Réparation <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">de téléphones</span>
                             </h1>
                             <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
-                                Écran cassé, batterie fatiguée, connecteur endommagé ou panne carte mère. Nos techniciens certifiés redonnent vie à vos appareils électroniques avec des pièces d'origine garantes 1 an.
+                                Écran, batterie ou connecteur? On répare votre appareil avec pièces garanties.
                             </p>
                             <!-- Feature badges -->
                             <div class="pt-2 flex flex-wrap gap-4 justify-center lg:justify-start text-xs font-medium text-slate-300">
@@ -190,10 +190,10 @@
                             <!-- CTA Buttons -->
                             <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                                 <button onclick="scrollToEstimator('tech')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all shadow-lg shadow-sky-500/20">
-                                    Estimer mon devis instantané
+                                    Estimer
                                 </button>
                                 <button onclick="openBookingModal('Smartphone')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold glass-card text-white hover:bg-slate-800 transition-all">
-                                    Réserver un créneau
+                                    Rendez-vous
                                 </button>
                             </div>
                         </div>
@@ -206,9 +206,9 @@
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                     <i class="fa-solid fa-calculator text-sky-400"></i>
-                                    Simulateur Réparation
+                                    Estimateur
                                 </h3>
-                                <p class="text-xs text-slate-400 mb-6">Obtenez immédiatement un prix indicatif pour votre matériel.</p>
+                                <p class="text-xs text-slate-400 mb-6">Estimation rapide.</p>
                                 
                                 <div class="space-y-4">
                                     <div>
@@ -233,8 +233,8 @@
 
                                     <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
                                         <div>
-                                            <span class="text-xs text-slate-400 block">Prix estimé TTC :</span>
-                                            <span id="tech-estimated-price" class="text-3xl font-black text-sky-400">69$</span>
+                                            <span class="text-xs text-slate-400 block">Prix (CAD)</span>
+                                            <span id="tech-estimated-price" class="text-3xl font-black text-sky-400">79 $</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-xs text-slate-400 block">Délai moyen :</span>
@@ -243,7 +243,7 @@
                                     </div>
 
                                     <button onclick="openBookingFromEstimator('tech')" class="w-full py-3.5 rounded-xl font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all text-sm">
-                                        Bloquer cette offre & Réserver
+                                        Réserver
                                     </button>
                                 </div>
                             </div>
@@ -255,8 +255,8 @@
             <!-- Tech Services Grid -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Nos Prestations Électroniques</h2>
-                    <p class="mt-4 text-slate-400">Prise en charge complète de votre matériel informatique et multimédia.</p>
+                    <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Nos services</h2>
+                    <p class="mt-4 text-slate-400">Téléphones, ordinateurs et consoles.</p>
                     
                     <!-- Search Filter Bar -->
                     <div class="mt-8 relative max-w-md mx-auto">
@@ -282,7 +282,7 @@
                             </ul>
                         </div>
                         <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
-                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">39 €</strong></span>
+                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">39 $</strong></span>
                             <button onclick="openBookingModal('Smartphone')" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
                                 Réserver <i class="fa-solid fa-arrow-right text-xs"></i>
                             </button>
@@ -305,7 +305,7 @@
                             </ul>
                         </div>
                         <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
-                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">49$</strong></span>
+                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">49 $</strong></span>
                             <button onclick="openBookingModal('Ordinateur')" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
                                 Réserver <i class="fa-solid fa-arrow-right text-xs"></i>
                             </button>
@@ -328,7 +328,7 @@
                             </ul>
                         </div>
                         <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
-                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">45 €</strong></span>
+                            <span class="text-xs font-bold text-slate-400">Dès <strong class="text-sky-400 text-lg">45 $</strong></span>
                             <button onclick="openBookingModal('Console')" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
                                 Réserver <i class="fa-solid fa-arrow-right text-xs"></i>
                             </button>
@@ -351,13 +351,13 @@
                         <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                             <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
                                 <i class="fa-solid fa-leaf text-xs"></i>
-                                <span>Atelier Mobilité Douce & Électrique</span>
+                                <span>Vélos & VAE</span>
                             </div>
                             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-                                Entretien & Réparation <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Tous Vélos & VAE</span>
+                                Entretien <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">& réparation</span>
                             </h1>
                             <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
-                                Du simple changement de chambre à air au diagnostic complet de votre Vélo à Assistance Électrique (VAE). Nos techniciens certifiés prennent soin de votre monture en atelier ou sur rendez-vous.
+                                Pneu crevé, frein ou vélo électrique? On règle ça.
                             </p>
                             <!-- Feature badges -->
                             <div class="pt-2 flex flex-wrap gap-4 justify-center lg:justify-start text-xs font-medium text-slate-300">
@@ -377,10 +377,10 @@
                             <!-- CTA Buttons -->
                             <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                                 <button onclick="scrollToEstimator('bike')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all shadow-lg shadow-emerald-500/20">
-                                    Découvrir nos forfaits révision
+                                    Forfaits
                                 </button>
                                 <button onclick="openBookingModal('Vélo')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold glass-card text-white hover:bg-slate-800 transition-all">
-                                    Réserver mon entretien
+                                    Rendez-vous
                                 </button>
                             </div>
                         </div>
@@ -393,9 +393,9 @@
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                     <i class="fa-solid fa-sliders text-emerald-400"></i>
-                                    Simulateur Révision
+                                    Estimateur
                                 </h3>
-                                <p class="text-xs text-slate-400 mb-6">Évaluez l'entretien nécessaire selon la typologie de votre vélo.</p>
+                                <p class="text-xs text-slate-400 mb-6">Choisissez votre vélo.</p>
                                 
                                 <div class="space-y-4">
                                     <div>
@@ -419,8 +419,8 @@
 
                                     <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
                                         <div>
-                                            <span class="text-xs text-slate-400 block">Tarif indicatif :</span>
-                                            <span id="bike-estimated-price" class="text-3xl font-black text-emerald-400">45 €</span>
+                                            <span class="text-xs text-slate-400 block">Prix (CAD)</span>
+                                            <span id="bike-estimated-price" class="text-3xl font-black text-emerald-400">39 $</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-xs text-slate-400 block">Temps d'immobilisation :</span>
@@ -429,7 +429,7 @@
                                     </div>
 
                                     <button onclick="openBookingFromEstimator('bike')" class="w-full py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all text-sm">
-                                        Réserver cette prestation
+                                        Réserver
                                     </button>
                                 </div>
                             </div>
@@ -441,8 +441,8 @@
             <!-- Bike Packages Section -->
             <div id="bike-packages" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Nos Forfaits Révision</h2>
-                    <p class="mt-4 text-slate-400">Des formules complètes et transparentes pour rouler en toute sérénité.</p>
+                    <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Forfaits</h2>
+                    <p class="mt-4 text-slate-400">Entretien simple, prix clair.</p>
                 </div>
 
                 <div class="grid lg:grid-cols-3 gap-8">
@@ -453,7 +453,7 @@
                             <h3 class="text-2xl font-bold text-white mt-4">Forfait Éco</h3>
                             <p class="text-slate-400 text-sm mt-2">Pour un contrôle de sécurité périodique rapide.</p>
                             <div class="mt-6 mb-8">
-                                <span class="text-4xl font-extrabold text-white">39 €</span>
+                                <span class="text-4xl font-extrabold text-white">39 $</span>
                             </div>
                             <ul class="space-y-3 text-sm text-slate-300">
                                 <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Contrôle des points de sécurité (15 points)</li>
@@ -477,7 +477,7 @@
                             <h3 class="text-2xl font-bold text-white mt-4">Forfait Intégral</h3>
                             <p class="text-slate-400 text-sm mt-2">Remise à neuf complète et réglages de précision.</p>
                             <div class="mt-6 mb-8">
-                                <span class="text-4xl font-extrabold text-white">79 €</span>
+                                <span class="text-4xl font-extrabold text-white">79 $</span>
                             </div>
                             <ul class="space-y-3 text-sm text-slate-300">
                                 <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Tout le contenu du Forfait Éco</li>
@@ -499,7 +499,7 @@
                             <h3 class="text-2xl font-bold text-white mt-4">Forfait Électrique</h3>
                             <p class="text-slate-400 text-sm mt-2">Dédié aux vélos à assistance électrique (Bosch, Shimano...)</p>
                             <div class="mt-6 mb-8">
-                                <span class="text-4xl font-extrabold text-white">99 €</span>
+                                <span class="text-4xl font-extrabold text-white">99 $</span>
                             </div>
                             <ul class="space-y-3 text-sm text-slate-300">
                                 <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-3"></i> Tout le contenu du Forfait Intégral</li>
@@ -523,28 +523,28 @@
                                 <h4 class="text-sm font-bold text-white">Chambre à air / Pneu</h4>
                                 <span class="text-xs text-slate-400">Montage inclus</span>
                             </div>
-                            <span class="text-base font-extrabold text-emerald-400">15 €</span>
+                            <span class="text-base font-extrabold text-emerald-400">15 $</span>
                         </div>
                         <div class="glass-card p-4 rounded-xl flex items-center justify-between">
                             <div>
                                 <h4 class="text-sm font-bold text-white">Purge Frein Hydraulique</h4>
                                 <span class="text-xs text-slate-400">Par étrier</span>
                             </div>
-                            <span class="text-base font-extrabold text-emerald-400">25 €</span>
+                            <span class="text-base font-extrabold text-emerald-400">25 $</span>
                         </div>
                         <div class="glass-card p-4 rounded-xl flex items-center justify-between">
                             <div>
                                 <h4 class="text-sm font-bold text-white">Changement de Chaîne</h4>
                                 <span class="text-xs text-slate-400">Réglage compris</span>
                             </div>
-                            <span class="text-base font-extrabold text-emerald-400">20 €</span>
+                            <span class="text-base font-extrabold text-emerald-400">20 $</span>
                         </div>
                         <div class="glass-card p-4 rounded-xl flex items-center justify-between">
                             <div>
                                 <h4 class="text-sm font-bold text-white">Dévoilage de roue</h4>
                                 <span class="text-xs text-slate-400">Par roue</span>
                             </div>
-                            <span class="text-base font-extrabold text-emerald-400">20 €</span>
+                            <span class="text-base font-extrabold text-emerald-400">20 $</span>
                         </div>
                     </div>
                 </div>
@@ -784,33 +784,33 @@
                     <i class="fa-solid fa-calendar-check"></i>
                     <span>Prise de Rendez-vous</span>
                 </div>
-                <h3 class="text-2xl font-bold text-white">Réserver un créneau</h3>
-                <p class="text-xs text-slate-400">Confirmez vos informations pour bloquer un technicien à l'atelier.</p>
+                <h3 class="text-2xl font-bold text-white">Demander un rendez-vous</h3>
+                <p class="text-xs text-slate-400">Indiquez vos coordonnées et vos disponibilités. Nous vous contacterons pour confirmer.</p>
             </div>
 
             <!-- Form -->
-            <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <form id="booking-form" name="reservation" data-reservation-form onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Département concerné</label>
-                    <select id="modal-department" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                    <label for="modal-department" class="block text-xs font-bold text-slate-300 uppercase mb-1">Service</label>
+                    <select id="modal-department" name="department" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
                         <option value="tech">Électronique & High-Tech</option>
                         <option value="bike">Cycles & Vélos</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Appareil / Modèle / Prestation</label>
-                    <input type="text" id="modal-service-details" required placeholder="Ex: iPhone 13 / Changement écran ou VAE Bosch / Revision" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                    <label for="modal-service-details" class="block text-xs font-bold text-slate-300 uppercase mb-1">Appareil ou service</label>
+                    <input type="text" id="modal-service-details" name="serviceDetails" required placeholder="Ex. iPhone 13, écran à réparer" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Date souhaitée</label>
-                        <input type="date" required id="modal-date" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                        <label for="modal-date" class="block text-xs font-bold text-slate-300 uppercase mb-1">Date souhaitée</label>
+                        <input type="date" required id="modal-date" name="date" autocomplete="off" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Heure</label>
-                        <select id="modal-time" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                        <label for="modal-time" class="block text-xs font-bold text-slate-300 uppercase mb-1">Heure souhaitée</label>
+                        <select id="modal-time" name="time" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
                             <option>10:00</option>
                             <option>11:30</option>
                             <option>14:00</option>
@@ -823,18 +823,23 @@
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nom complet</label>
-                        <input type="text" required placeholder="Jean Dupont" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                        <label for="modal-name" class="block text-xs font-bold text-slate-300 uppercase mb-1">Nom</label>
+                        <input type="text" id="modal-name" name="name" autocomplete="name" required placeholder="Votre nom" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Téléphone</label>
-                        <input type="tel" required placeholder="06 12 34 56 78" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                        <label for="modal-phone" class="block text-xs font-bold text-slate-300 uppercase mb-1">Téléphone</label>
+                        <input type="tel" id="modal-phone" name="phone" autocomplete="tel" required placeholder="514-555-0123" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
                     </div>
+                </div>
+
+                <div>
+                    <label for="modal-email" class="block text-xs font-bold text-slate-300 uppercase mb-1">Courriel</label>
+                    <input type="email" id="modal-email" name="email" autocomplete="email" required placeholder="vous@exemple.ca" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
                 </div>
 
                 <div class="pt-3">
                     <button type="submit" id="modal-submit-btn" class="w-full py-3.5 rounded-xl font-bold bg-sky-500 text-slate-950 hover:bg-sky-400 transition-all text-sm shadow-lg">
-                        Confirmer le Rendez-vous
+                        Envoyer une demande
                     </button>
                 </div>
             </form>
@@ -844,8 +849,8 @@
                 <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl">
                     <i class="fa-solid fa-circle-check"></i>
                 </div>
-                <h4 class="text-2xl font-bold text-white">Rendez-vous Confirmé !</h4>
-                <p class="text-xs text-slate-300 max-w-xs">Un SMS de confirmation vient de vous être envoyé. Notre équipe vous attend au créneau sélectionné.</p>
+                <h4 class="text-2xl font-bold text-white">Demande prête</h4>
+                <p class="text-xs text-slate-300 max-w-xs">L'envoi des demandes sera activé prochainement. Votre rendez-vous n'est pas encore confirmé.</p>
                 <button onclick="closeBookingModal()" class="px-6 py-2.5 rounded-xl font-bold bg-slate-800 text-white hover:bg-slate-700 text-xs">
                     Fermer
                 </button>
@@ -892,7 +897,7 @@
                 btnBikeMob.className = 'flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold text-slate-400 bg-slate-900 border border-slate-800';
 
                 // Accent Tagline & CTA
-                brandTagline.textContent = "Atelier High-Tech & Smart Repair";
+                brandTagline.textContent = "Réparations & mobilité";
                 brandTagline.className = "block text-xs font-medium text-sky-400 transition-colors duration-300";
                 
                 headerCta.className = "px-5 py-2.5 rounded-xl text-sm font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-all duration-200 shadow-md";
@@ -917,7 +922,7 @@
                 btnTechMob.className = 'flex items-center justify-center space-x-2 py-2 px-3 rounded-lg text-xs font-bold text-slate-400 bg-slate-900 border border-slate-800';
 
                 // Accent Tagline & CTA
-                brandTagline.textContent = "Atelier Mobilité Douce & Entretien Velo";
+                brandTagline.textContent = "Vélos & VAE";
                 brandTagline.className = "block text-xs font-medium text-emerald-400 transition-colors duration-300";
 
                 headerCta.className = "px-5 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all duration-200 shadow-md";
