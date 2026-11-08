@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
         tailwind.config = {
@@ -842,6 +844,7 @@
                         Envoyer une demande
                     </button>
                 </div>
+                <p id="booking-error" role="alert" class="hidden text-sm text-red-400"></p>
             </form>
 
             <!-- Success Overlay Message inside modal -->
@@ -849,8 +852,8 @@
                 <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl">
                     <i class="fa-solid fa-circle-check"></i>
                 </div>
-                <h4 class="text-2xl font-bold text-white">Demande prête</h4>
-                <p class="text-xs text-slate-300 max-w-xs">L'envoi des demandes sera activé prochainement. Votre rendez-vous n'est pas encore confirmé.</p>
+                <h4 id="booking-success-title" class="text-2xl font-bold text-white">Demande envoyée</h4>
+                <p id="booking-success-message" class="text-xs text-slate-300 max-w-xs">Votre demande a été enregistrée. Votre rendez-vous n'est pas encore confirmé.</p>
                 <button onclick="closeBookingModal()" class="px-6 py-2.5 rounded-xl font-bold bg-slate-800 text-white hover:bg-slate-700 text-xs">
                     Fermer
                 </button>
@@ -863,6 +866,8 @@
     <script>
         // Global state tracking
         let currentDept = 'tech';
+        const SUPABASE_URL = 'https://YOUR_PROJECT_REF.supabase.co';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
 
         // Switch Tab Department Logic
         function switchDepartment(dept) {
@@ -1065,9 +1070,54 @@
             success.classList.add('hidden');
         }
 
-        function handleFormSubmit(event) {
+        async function handleFormSubmit(event) {
             event.preventDefault();
-            document.getElementById('booking-success').classList.remove('hidden');
+
+            const form = event.currentTarget;
+            const submitButton = document.getElementById('modal-submit-btn');
+            const errorMessage = document.getElementById('booking-error');
+            const successOverlay = document.getElementById('booking-success');
+            const successTitle = document.getElementById('booking-success-title');
+            const successMessage = document.getElementById('booking-success-message');
+            errorMessage.classList.add('hidden');
+            successOverlay.classList.add('hidden');
+
+            if (SUPABASE_URL.includes('YOUR_PROJECT_REF') || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
+                errorMessage.textContent = 'La réservation en ligne n’est pas encore configurée. Veuillez nous appeler au 514-608-8177.';
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Envoi en cours…';
+
+            try {
+                const formData = new FormData(form);
+                const reservation = Object.fromEntries(formData.entries());
+                const { data, error } = await window.supabase
+                    .createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+                    .functions.invoke('request-reservation', { body: reservation });
+
+                if (error) {
+                    throw error;
+                }
+
+                if (data.notificationFailures && data.notificationFailures.length > 0) {
+                    successTitle.textContent = 'Demande enregistrée';
+                    successMessage.textContent = 'Votre demande est enregistrée, mais certaines notifications n’ont pas pu être envoyées. Nous vous contacterons pour confirmer le rendez-vous.';
+                } else {
+                    successTitle.textContent = 'Demande envoyée';
+                    successMessage.textContent = 'Votre demande a été enregistrée et les notifications ont été envoyées. Votre rendez-vous n’est pas encore confirmé.';
+                }
+                successOverlay.classList.remove('hidden');
+            } catch (error) {
+                console.error('Reservation submission failed:', error);
+                errorMessage.textContent = 'Impossible d’envoyer votre demande pour le moment. Veuillez réessayer ou nous appeler au 514-608-8177.';
+                errorMessage.classList.remove('hidden');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Envoyer une demande';
+            }
         }
 
         // Toggle Accordion FAQ

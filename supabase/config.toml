@@ -1,0 +1,4 @@
+project_id = "fix-ride"
+
+[functions.request-reservation]
+verify_jwt = true
