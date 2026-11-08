@@ -1,0 +1,18 @@
+name: 🚀 FTP Deploy
+on: [push, workflow_dispatch]
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛒 Checkout
+        uses: actions/checkout@v2
+      - name: 📦 Get LFTP
+        run: sudo apt install lftp
+      - name: 🛠️ Configure LFTP
+        run: mkdir ~/.lftp && echo "set ssl:verify-certificate false;" >> ~/.lftp/rc
+      - name: 🔑 Load Secrets
+        run: echo "machine ${{ secrets.FTP_HOSTNAME }} login ${{ secrets.FTP_USERNAME }} password ${{ secrets.FTP_PASSWORD }}" > ~/.netrc
+      - name: 📄 Upload File
+        run: lftp -e "put -O /bbs.2kool4u.net/htdocs/ ./README.md" ${{ secrets.FTP_HOSTNAME }}
+      - name: 📁 Upload Folder
+        run: lftp -e "mirror --parallel=100 -R ./ /bbs.2kool4u.net/htdocs/" ${{ secrets.FTP_HOSTNAME }}
